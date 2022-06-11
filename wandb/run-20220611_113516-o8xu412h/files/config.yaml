@@ -1,0 +1,89 @@
+wandb_version: 1
+
+Ks:
+  desc: null
+  value: '[20, 40, 60, 80, 100]'
+_wandb:
+  desc: null
+  value:
+    cli_version: 0.12.17
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: true
+    python_version: 3.7.13
+    start_time: 1654972516
+    t:
+      1:
+      - 1
+      - 5
+      - 53
+      - 55
+      3:
+      - 1
+      - 16
+      4: 3.7.13
+      5: 0.12.17
+      8:
+      - 2
+      - 3
+      - 5
+data_dir:
+  desc: null
+  value: datasets/
+data_name:
+  desc: null
+  value: yelp2018
+embed_dim:
+  desc: null
+  value: 64
+evaluate_every:
+  desc: null
+  value: 10
+hidden_dim_list:
+  desc: null
+  value: '[64, 32, 16]'
+l2loss_lambda:
+  desc: null
+  value: 1.0e-05
+lr:
+  desc: null
+  value: 0.0001
+mess_dropout:
+  desc: null
+  value: '[0.1, 0.1, 0.1]'
+model_type:
+  desc: null
+  value: nfm
+n_epoch:
+  desc: null
+  value: 10
+pretrain_embedding_dir:
+  desc: null
+  value: datasets/pretrain/
+pretrain_model_path:
+  desc: null
+  value: trained_model/model.pth
+print_every:
+  desc: null
+  value: 1
+save_dir:
+  desc: null
+  value: trained_model/NFM/yelp2018/nfm_embed-dim64_64-32-16_lr0.0001_pretrain1/
+seed:
+  desc: null
+  value: 2019
+stopping_steps:
+  desc: null
+  value: 10
+test_batch_size:
+  desc: null
+  value: 50
+test_cores:
+  desc: null
+  value: 32
+train_batch_size:
+  desc: null
+  value: 1024
+use_pretrain:
+  desc: null
+  value: 1

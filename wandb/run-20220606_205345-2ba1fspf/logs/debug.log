@@ -1,0 +1,25 @@
+2022-06-06 20:53:45,160 INFO    MainThread:34028 [wandb_setup.py:_flush():76] Loading settings from C:\Users\nicol\.config\wandb\settings
+2022-06-06 20:53:45,161 INFO    MainThread:34028 [wandb_setup.py:_flush():76] Loading settings from C:\Users\nicol\Documents\Academics\Spring2022\TCSS556\KGAT-pytorch\wandb\settings
+2022-06-06 20:53:45,161 INFO    MainThread:34028 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2022-06-06 20:53:45,161 INFO    MainThread:34028 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'main_kgat.py', 'program': 'main_kgat.py'}
+2022-06-06 20:53:45,161 INFO    MainThread:34028 [wandb_init.py:_log_setup():428] Logging user logs to C:\Users\nicol\Documents\Academics\Spring2022\TCSS556\KGAT-pytorch\wandb\run-20220606_205345-2ba1fspf\logs\debug.log
+2022-06-06 20:53:45,161 INFO    MainThread:34028 [wandb_init.py:_log_setup():429] Logging internal logs to C:\Users\nicol\Documents\Academics\Spring2022\TCSS556\KGAT-pytorch\wandb\run-20220606_205345-2ba1fspf\logs\debug-internal.log
+2022-06-06 20:53:45,162 INFO    MainThread:34028 [wandb_init.py:init():462] calling init triggers
+2022-06-06 20:53:45,162 INFO    MainThread:34028 [wandb_init.py:init():466] wandb.init called with sweep_config: {}
+config: {'seed': 2019, 'data_name': 'last-fm', 'data_dir': 'datasets/', 'use_pretrain': 1, 'pretrain_embedding_dir': 'datasets/pretrain/', 'pretrain_model_path': 'trained_model/model.pth', 'cf_batch_size': 1024, 'kg_batch_size': 2048, 'test_batch_size': 10000, 'embed_dim': 64, 'relation_dim': 64, 'laplacian_type': 'random-walk', 'aggregation_type': 'bi-interaction', 'conv_dim_list': '[64, 32, 16]', 'mess_dropout': '[0.1, 0.1, 0.1]', 'kg_l2loss_lambda': 1e-05, 'cf_l2loss_lambda': 1e-05, 'lr': 0.0001, 'n_epoch': 10, 'stopping_steps': 10, 'cf_print_every': 1, 'kg_print_every': 1, 'evaluate_every': 10, 'Ks': '[20, 40, 60, 80, 100]', 'save_dir': 'trained_model/KGAT/last-fm/embed-dim64_relation-dim64_random-walk_bi-interaction_64-32-16_lr0.0001_pretrain1/'}
+2022-06-06 20:53:45,162 INFO    MainThread:34028 [wandb_init.py:init():515] starting backend
+2022-06-06 20:53:45,162 INFO    MainThread:34028 [backend.py:_multiprocessing_setup():99] multiprocessing start_methods=spawn, using: spawn
+2022-06-06 20:53:45,168 INFO    MainThread:34028 [backend.py:ensure_launched():217] starting backend process...
+2022-06-06 20:53:45,243 INFO    MainThread:34028 [backend.py:ensure_launched():222] started backend process with pid: 32200
+2022-06-06 20:53:45,244 INFO    MainThread:34028 [wandb_init.py:init():525] backend started and connected
+2022-06-06 20:53:45,249 INFO    MainThread:34028 [wandb_init.py:init():596] updated telemetry
+2022-06-06 20:53:45,298 INFO    MainThread:34028 [wandb_init.py:init():628] communicating run to backend with 30 second timeout
+2022-06-06 20:53:49,544 INFO    MainThread:34028 [wandb_run.py:_on_init():1924] communicating current version
+2022-06-06 20:53:49,752 INFO    MainThread:34028 [wandb_run.py:_on_init():1928] got version response 
+2022-06-06 20:53:49,752 INFO    MainThread:34028 [wandb_init.py:init():662] starting run threads in backend
+2022-06-06 20:54:07,902 INFO    MainThread:34028 [wandb_run.py:_console_start():1898] atexit reg
+2022-06-06 20:54:07,903 INFO    MainThread:34028 [wandb_run.py:_redirect():1771] redirect: SettingsConsole.WRAP
+2022-06-06 20:54:07,903 INFO    MainThread:34028 [wandb_run.py:_redirect():1808] Wrapping output streams.
+2022-06-06 20:54:07,904 INFO    MainThread:34028 [wandb_run.py:_redirect():1832] Redirects installed.
+2022-06-06 20:54:07,904 INFO    MainThread:34028 [wandb_init.py:init():688] run started, returning control to user process
+2022-06-06 20:57:39,646 INFO    MainThread:34028 [wandb_watch.py:watch():47] Watching

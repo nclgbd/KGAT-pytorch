@@ -17,6 +17,7 @@ from utils.metrics import *
 from utils.model_helper import *
 from data_loader.loader_nfm import DataLoaderNFM
 
+import wandb
 
 def evaluate_batch(model, dataloader, user_ids, Ks):
     train_user_dict = dataloader.train_user_dict
@@ -108,6 +109,7 @@ def evaluate(model, dataloader, Ks, num_processes, device):
     user_ids = np.array(user_ids)
     item_ids = np.array(item_ids)
     metrics_dict = calc_metrics_at_k(cf_score_matrix, train_user_dict, test_user_dict, user_ids, item_ids, Ks)
+    wandb.log(metrics_dict)
 
     cf_score_matrix = cf_score_matrix.numpy()
     for k in Ks:
@@ -144,6 +146,7 @@ def train(args):
         model = load_model(model, args.pretrain_model_path)
 
     model.to(device)
+    wandb.watch(model)
     logging.info(model)
 
     optimizer = optim.Adam(model.parameters(), lr=args.lr)
@@ -192,6 +195,7 @@ def train(args):
 
             if (iter % args.print_every) == 0:
                 logging.info('CF Training: Epoch {:04d} Iter {:04d} / {:04d} | Time {:.1f}s | Iter Loss {:.4f} | Iter Mean Loss {:.4f}'.format(epoch, iter, n_batch, time() - time2, batch_loss.item(), total_loss / iter))
+        
         logging.info('CF Training: Epoch {:04d} Total Iter {:04d} | Total Time {:.1f}s | Iter Mean Loss {:.4f}'.format(epoch, n_batch, time() - time1, total_loss / n_batch))
 
         # evaluate cf
@@ -208,6 +212,7 @@ def train(args):
             best_recall, should_stop = early_stopping(metrics_list[k_min]['recall'], args.stopping_steps)
 
             if should_stop:
+                wandb.run.summary = metrics_list[k_min]
                 break
 
             if metrics_list[k_min]['recall'].index(best_recall) == len(epoch_list) - 1:
@@ -225,12 +230,15 @@ def train(args):
     metrics_df = pd.DataFrame(metrics_df).transpose()
     metrics_df.columns = metrics_cols
     metrics_df.to_csv(args.save_dir + '/metrics.tsv', sep='\t', index=False)
+    wandb.run.summary["avg_metrics"] = metrics_df.mean().to_dict()
 
     # print best metrics
     best_metrics = metrics_df.loc[metrics_df['epoch_idx'] == best_epoch].iloc[0].to_dict()
+    wandb.run.summary["best_metrics"] = best_metrics
     logging.info('Best CF Evaluation: Epoch {:04d} | Precision [{:.4f}, {:.4f}], Recall [{:.4f}, {:.4f}], NDCG [{:.4f}, {:.4f}]'.format(
         int(best_metrics['epoch_idx']), best_metrics['precision@{}'.format(k_min)], best_metrics['precision@{}'.format(k_max)], best_metrics['recall@{}'.format(k_min)], best_metrics['recall@{}'.format(k_max)], best_metrics['ndcg@{}'.format(k_min)], best_metrics['ndcg@{}'.format(k_max)]))
 
+    wandb.finish()
 
 def predict(args):
     # GPU / CPU
@@ -261,7 +269,6 @@ def predict(args):
         metrics_dict[k_min]['precision'], metrics_dict[k_max]['precision'], metrics_dict[k_min]['recall'], metrics_dict[k_max]['recall'], metrics_dict[k_min]['ndcg'], metrics_dict[k_max]['ndcg']))
 
 
-
 if __name__ == '__main__':
     try:
         mp.set_start_method('spawn')
@@ -269,6 +276,7 @@ if __name__ == '__main__':
         pass
 
     args = parse_nfm_args()
+    wandb.init(config=args, project="KGAT Demo", entity="nguob-uw")
     train(args)
     # predict(args)
 

@@ -1,0 +1,23 @@
+{
+    "os": "Windows-10-10.0.19041-SP0",
+    "python": "3.7.13",
+    "heartbeatAt": "2022-06-07T00:15:40.911781",
+    "startedAt": "2022-06-07T00:15:38.485581",
+    "docker": null,
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "gpu_count": 1,
+    "cpu_count": 16,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "<python with no main file>",
+    "git": {
+        "remote": "https://github.com/nclgbd/KGAT-pytorch.git",
+        "commit": "bf8e9e909aceecfed130da984dccbc727259694e"
+    },
+    "email": "nicoleguob@gmail.com",
+    "root": "C:/Users/nicol/Documents/Academics/Spring2022/TCSS556/KGAT-pytorch",
+    "host": "SorNZXT",
+    "username": "nicol",
+    "executable": "C:\\Users\\nicol\\Anaconda3\\envs\\kgat-pytorch\\python.exe"
+}
