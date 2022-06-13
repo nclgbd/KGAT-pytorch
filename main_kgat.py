@@ -45,7 +45,7 @@ def evaluate(model, dataloader, Ks, device):
 
             batch_scores = batch_scores.cpu()
             batch_metrics = calc_metrics_at_k(batch_scores, train_user_dict, test_user_dict, batch_user_ids.cpu().numpy(), item_ids.cpu().numpy(), Ks)
-            wandb.log(batch_metrics)
+            
             cf_scores.append(batch_scores.numpy())
             for k in Ks:
                 for m in metric_names:
@@ -87,7 +87,6 @@ def train(args):
         model = load_model(model, args.pretrain_model_path)
 
     model.to(device)
-    wandb.watch(model)
     logging.info(model)
 
     cf_optimizer = optim.Adam(model.parameters(), lr=args.lr)
@@ -182,7 +181,6 @@ def train(args):
             logging.info('CF Evaluation: Epoch {:04d} | Total Time {:.1f}s | Precision [{:.4f}, {:.4f}], Recall [{:.4f}, {:.4f}], NDCG [{:.4f}, {:.4f}]'.format(
                 epoch, time() - time6, metrics_dict[k_min]['precision'], metrics_dict[k_max]['precision'], metrics_dict[k_min]['recall'], metrics_dict[k_max]['recall'], metrics_dict[k_min]['ndcg'], metrics_dict[k_max]['ndcg']))
 
-            wandb.log(metrics_dict, step=epoch)
             epoch_list.append(epoch)
             for k in Ks:
                 for m in ['precision', 'recall', 'ndcg']:
@@ -190,7 +188,6 @@ def train(args):
             best_recall, should_stop = early_stopping(metrics_list[k_min]['recall'], args.stopping_steps)
 
             if should_stop:
-                wandb.run.summary = metrics_list[k_min]
                 break
 
             if metrics_list[k_min]['recall'].index(best_recall) == len(epoch_list) - 1:
@@ -214,7 +211,6 @@ def train(args):
     logging.info('Best CF Evaluation: Epoch {:04d} | Precision [{:.4f}, {:.4f}], Recall [{:.4f}, {:.4f}], NDCG [{:.4f}, {:.4f}]'.format(
         int(best_metrics['epoch_idx']), best_metrics['precision@{}'.format(k_min)], best_metrics['precision@{}'.format(k_max)], best_metrics['recall@{}'.format(k_min)], best_metrics['recall@{}'.format(k_max)], best_metrics['ndcg@{}'.format(k_min)], best_metrics['ndcg@{}'.format(k_max)]))
 
-    wandb.finish()
 
 def predict(args):
     # GPU / CPU
@@ -234,7 +230,6 @@ def predict(args):
     k_max = max(Ks)
 
     cf_scores, metrics_dict = evaluate(model, data, Ks, device)
-    wandb.log(metrics_dict)
     np.save(args.save_dir + 'cf_scores.npy', cf_scores)
     print('CF Evaluation: Precision [{:.4f}, {:.4f}], Recall [{:.4f}, {:.4f}], NDCG [{:.4f}, {:.4f}]'.format(
         metrics_dict[k_min]['precision'], metrics_dict[k_max]['precision'], metrics_dict[k_min]['recall'], metrics_dict[k_max]['recall'], metrics_dict[k_min]['ndcg'], metrics_dict[k_max]['ndcg']))
@@ -243,7 +238,6 @@ def predict(args):
 
 if __name__ == '__main__':
     args = parse_kgat_args()
-    wandb.init(config=args, project="KGAT Demo", entity="nguob-uw")
     train(args)
     # predict(args)
 

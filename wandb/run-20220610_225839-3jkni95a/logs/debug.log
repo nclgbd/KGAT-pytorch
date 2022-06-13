@@ -14,3 +14,13 @@ config: {'seed': 2019, 'model_type': 'nfm', 'data_name': 'last-fm', 'data_dir': 
 2022-06-10 22:58:39,909 INFO    MainThread:12176 [wandb_init.py:init():525] backend started and connected
 2022-06-10 22:58:39,912 INFO    MainThread:12176 [wandb_init.py:init():596] updated telemetry
 2022-06-10 22:58:39,951 INFO    MainThread:12176 [wandb_init.py:init():628] communicating run to backend with 30 second timeout
+2022-06-10 22:58:41,177 INFO    MainThread:12176 [wandb_run.py:_on_init():1924] communicating current version
+2022-06-10 22:58:41,360 INFO    MainThread:12176 [wandb_run.py:_on_init():1928] got version response upgrade_message: "wandb version 0.12.18 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2022-06-10 22:58:41,360 INFO    MainThread:12176 [wandb_init.py:init():662] starting run threads in backend
+2022-06-10 22:58:43,420 INFO    MainThread:12176 [wandb_run.py:_console_start():1898] atexit reg
+2022-06-10 22:58:43,421 INFO    MainThread:12176 [wandb_run.py:_redirect():1771] redirect: SettingsConsole.WRAP
+2022-06-10 22:58:43,421 INFO    MainThread:12176 [wandb_run.py:_redirect():1808] Wrapping output streams.
+2022-06-10 22:58:43,422 INFO    MainThread:12176 [wandb_run.py:_redirect():1832] Redirects installed.
+2022-06-10 22:58:43,422 INFO    MainThread:12176 [wandb_init.py:init():688] run started, returning control to user process
+2022-06-10 22:58:46,732 INFO    MainThread:12176 [wandb_watch.py:watch():47] Watching
